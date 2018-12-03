@@ -1,6 +1,6 @@
 import numpy as np
 
-f = open('data.txt', 'r')
+f = open('./input/01.txt', 'r')
 data = f.readlines()
 
 SIZE = 1000

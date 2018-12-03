@@ -1,6 +1,6 @@
 
 # Part One
-f = open('data.txt', 'r')
+f = open('./input/01.txt', 'r')
 
 freq = 0
 for line in f.readlines():
@@ -10,7 +10,7 @@ print("Part 1 result:", freq)
 
 
 # Part Two
-f = open('data.txt', 'r')
+f = open('./input/01.txt', 'r')
 fcl = list()
 for line in f.readlines():
     fcl.append(int(line))
