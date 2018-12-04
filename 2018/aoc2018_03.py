@@ -1,9 +1,11 @@
 import numpy as np
 
-f = open('./input/01.txt', 'r')
+f = open('./input/aoc2018_03.txt', 'r')
 data = f.readlines()
 
 SIZE = 1000
+fab = np.zeros((SIZE, SIZE))
+l = list()
 
 class Claim():
     def __init__(self, _id: int, x: int, y: int, w: int, h: int):
@@ -18,9 +20,6 @@ def parse_data(data):
     px, py = pos[:-1].split(',')
     sx, sy = size.split('x')
     return _id, int(px), int(px), int(px), int(px)
-
-fab = np.zeros((SIZE, SIZE))
-l = list()
 
 def part_1(dat):
     for line in dat:

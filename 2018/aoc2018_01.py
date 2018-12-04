@@ -1,18 +1,18 @@
 
 # Part One
-f = open('./input/01.txt', 'r')
+f = open('./input/aoc2018_01.txt', 'r')
+data = f.readlines()
 
 freq = 0
-for line in f.readlines():
+for line in data:
     freq += int(line)
 
 print("Part 1 result:", freq)
 
 
 # Part Two
-f = open('./input/01.txt', 'r')
 fcl = list()
-for line in f.readlines():
+for line in data:
     fcl.append(int(line))
 
 c = True
