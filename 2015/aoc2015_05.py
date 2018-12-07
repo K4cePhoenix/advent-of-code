@@ -25,6 +25,7 @@ def part_1(dat):
     return nice_strings
 
 def part_2(dat):
+    # needs more work
     nice_strings = 0
     for string in dat:
         string = string.strip()

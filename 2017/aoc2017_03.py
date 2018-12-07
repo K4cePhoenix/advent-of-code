@@ -26,7 +26,7 @@ def part_1(dat):
             pos = step(pos, dn)
             steps += 1
             if steps >= int(dat[0])-1:
-                return abs(pos[0]) + abs(pos[1])
+                return int(abs(pos[0]) + abs(pos[1]))
         dnc += 1
         if dnc % 2 == 0:
             dist += 1

@@ -7,7 +7,7 @@ freq = 0
 for line in data:
     freq += int(line)
 
-print("Part 1 result:", freq)
+print(freq)
 
 
 # Part Two
@@ -26,4 +26,4 @@ while c:
             break
         s.add(freq)
 
-print("Part 2 result:", freq)
+print(freq)

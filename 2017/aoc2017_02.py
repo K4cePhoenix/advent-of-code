@@ -21,7 +21,7 @@ def part_2(dat):
     for line in dat:
         tmp = list(map(int, line.split()))
         _sum += bla(tmp)
-    return _sum
+    return int(_sum)
 
 print(part_1(data))
 print(part_2(data))

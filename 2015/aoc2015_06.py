@@ -17,7 +17,7 @@ def part_1(dat):
             grid[coords[0]:coords[2]+1, coords[1]:coords[3]+1] = np.ones((coords[2]+1-coords[0], coords[3]+1-coords[1]))
         elif m.group(1) == 'turn off':
             grid[coords[0]:coords[2]+1, coords[1]:coords[3]+1] = np.zeros((coords[2]+1-coords[0], coords[3]+1-coords[1]))
-    return np.sum(grid)
+    return int(np.sum(grid))
 
 def part_2(dat):
     grid = np.zeros((1000, 1000))
@@ -32,7 +32,7 @@ def part_2(dat):
         elif m.group(1) == 'turn off':
             grid[coords[0]:coords[2]+1, coords[1]:coords[3]+1] -= np.ones((coords[2]+1-coords[0], coords[3]+1-coords[1]))
         grid[np.where(grid < 0)] = 0
-    return np.sum(grid)
+    return int(np.sum(grid))
 
 print(part_1(data))
 print(part_2(data))

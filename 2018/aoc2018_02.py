@@ -24,7 +24,7 @@ for line in data:
     twos += two
     threes += three
 
-print(twos, threes, twos*threes)
+print(twos*threes)
 
 
 # Part Two
