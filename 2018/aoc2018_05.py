@@ -30,7 +30,7 @@ def part_2(data):
     alphabet = "abcdefghijklmnopqrstuvwxyz"
     pairs = [l + l.upper() for l in alphabet]
     pairs += [l.upper() + l for l in alphabet]
-    res = 999999999999999
+    res = len(dat)
     for l in alphabet:
         tmp = dat+''
         tmp = tmp.replace(l, '')
