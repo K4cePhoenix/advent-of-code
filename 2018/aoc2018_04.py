@@ -22,18 +22,14 @@ def parse_guards(data):
 
 def part_1(data):
     guards, times = parse_guards(data)
-    (guard, time) = max(times.items(), key=lambda i: i[1])
-    (minute, count) = max([(minute, sum(1 for start, end in guards[guard] if start <= minute < end)) for minute in range(60)], key=lambda i: i[1])
+    guard, time = max(times.items(), key=lambda i: i[1])
+    minute, count = max([(minute, sum(1 for start, end in guards[guard] if start <= minute < end)) for minute in range(60)], key=lambda i: i[1])
     return guard * minute
-    # _, _id = max((sum(c.values()), _id) for _id, c in guards.items())
-    # return _id * guards[_id].most_common()[0][0]
 
 def part_2(data):
     guards, times = parse_guards(data)
-    (guard, minute, count) = max([(guard, minute, sum(1 for start, end in guards[guard] if start <= minute < end)) for minute in range(60) for guard in guards], key=lambda i: i[2])
+    guard, minute, count = max([(guard, minute, sum(1 for t0, t1 in guards[guard] if t0 <= minute < t1)) for minute in range(60) for guard in guards], key=lambda i: i[2])
     return guard * minute
-    # (_, minute), _id = max((c.most_common()[0][::-1], _id) for _id, c in guards.items())
-    # return _id * minute
 
 print(part_1(data))
 print(part_2(data))
