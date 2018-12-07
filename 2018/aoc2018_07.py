@@ -83,7 +83,7 @@ def part_2(data, mt, wn):
         workers.append(w)
     while True:
         available = check_req(parsel, remaining)
-        for i, worker in enumerate(workers):
+        for worker in workers:
             asigned = [w.task for w in workers]
             if worker.idle:
                 parsel, worker, available = asign_worker(parsel, worker, asigned, available)
