@@ -21,16 +21,10 @@ def get_solution(data):
     t = 0
     while True:
         p = (np.argmin(data[:, :2], axis=0), np.argmax(data[:, :2], axis=0))
-        tmax = data[p[1][0],0]
-        tmix = data[p[0][0],0]
-        tmay = data[p[1][1],1]
-        tmiy = data[p[0][1],1]
+        ((tmix, tmiy), (tmax, tmay)) = ((data[p[0][0],0], data[p[0][1],1]), (data[p[1][0],0], data[p[1][1],1]))
         if tmax-tmix < s[1][0]-s[0][0] and tmay-tmiy < s[1][1]-s[0][1]:
             t += 1
-            s[1][0] = tmax
-            s[0][0] = tmix
-            s[1][1] = tmay
-            s[0][1] = tmiy
+            s = [[tmix, tmiy], [tmax, tmay]]
             data[:, :2] += data[:, 2:]
         else:
             t -= 1
