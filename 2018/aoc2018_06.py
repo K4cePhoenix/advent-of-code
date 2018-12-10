@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-with open('./input/aoc2018_06.txt', 'r') as f:
+with open('./2018/input/aoc2018_06.txt', 'r') as f:
     data = f.read().split('\n')
 
 def parse_data(dat):

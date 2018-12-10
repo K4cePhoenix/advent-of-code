@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-f = open('./input/aoc2015_07.txt', 'r')
+f = open('./2015/input/aoc2015_07.txt', 'r')
 
 data = f.readlines()
 

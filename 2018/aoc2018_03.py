@@ -1,7 +1,6 @@
 import numpy as np
-from matplotlib import pyplot as plt
 
-f = open('./input/aoc2018_03.txt', 'r')
+f = open('./2018/input/aoc2018_03.txt', 'r')
 data = f.readlines()
 
 SIZE = 1000
@@ -30,8 +29,6 @@ def part_1(dat):
     for c in cs:
         tmp = np.ones(fab[c.x:c.x+c.w, c.y:c.y+c.h].shape)
         fab[c.x:c.x+c.w, c.y:c.y+c.h] += tmp
-    plt.imshow(fab)
-    plt.show()
     return np.size(np.where(fab > 1)[0])
 
 def part_2(dat):

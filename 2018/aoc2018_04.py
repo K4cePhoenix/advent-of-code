@@ -2,7 +2,7 @@ from collections import defaultdict
 from datetime import datetime
 import re
 
-f = open('./input/aoc2018_04.txt', 'r')
+f = open('./2018/input/aoc2018_04.txt', 'r')
 data = f.readlines()
 
 def parse_guards(data):

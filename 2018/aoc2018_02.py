@@ -1,6 +1,6 @@
 
 # Part One
-f = open('./input/aoc2018_02.txt', 'r')
+f = open('./2018/input/aoc2018_02.txt', 'r')
 data = f.readlines()
 
 twos = 0

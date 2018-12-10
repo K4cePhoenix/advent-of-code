@@ -1,10 +1,7 @@
-import numpy as np
-import cv2
-import itertools
 from collections import OrderedDict
 from string import ascii_uppercase
 
-with open('./input/aoc2018_07.txt', 'r') as f:
+with open('./2018/input/aoc2018_07.txt', 'r') as f:
     data = f.read().split('\n')
 
 def parse_data(dat):

@@ -1,5 +1,5 @@
 
-f = open('./input/aoc2015_05.txt', 'r')
+f = open('./2015/input/aoc2015_05.txt', 'r')
 
 data = f.readlines()
 

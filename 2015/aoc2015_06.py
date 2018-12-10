@@ -1,7 +1,7 @@
 import re
 import numpy as np
 
-f = open('./input/aoc2015_06.txt', 'r')
+f = open('./2015/input/aoc2015_06.txt', 'r')
 
 data = f.readlines()
 

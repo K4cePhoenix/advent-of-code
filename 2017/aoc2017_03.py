@@ -1,6 +1,6 @@
 import numpy as np
 
-f = open('./input/aoc2017_03.txt', 'r')
+f = open('./2017/input/aoc2017_03.txt', 'r')
 
 data = f.readlines()
 
