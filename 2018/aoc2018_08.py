@@ -14,16 +14,17 @@ def get_meta(dat):
         tmp += i
     return tmp
 
-def break_children(meta, dat):
+def break_children(meta, dat, idx=0):
     n = dat[0]
     e = dat[1]
     dat = dat[2:]
-    for i in range(n):
-        meta, dat = break_children(meta, dat)
+    for _ in range(n):
+        meta, dat, idx = break_children(meta, dat, idx)
     tmp = get_meta(dat[:e])
+    print(idx, tmp)
     meta += tmp
     dat = dat[e:]
-    return meta, dat
+    return meta, dat, idx+1
 
 def break_children2(root, dat):
     n = dat[0]
@@ -47,7 +48,7 @@ def break_children2(root, dat):
 
 def part_1(data):
     data = parse_data(data)
-    meta, _ = break_children(0, data)
+    meta, *_ = break_children(0, data)
     return meta
 
 def part_2(data):

@@ -1,18 +1,54 @@
 from time import time
+from matplotlib import pyplot as plt
 import numpy as np
-import pytesseract
-import cv2
+import re
+import sys
 
-with open('./2018/input/aoc2018_10.txt', 'r') as f:
+try:
+    import pytesseract
+    import cv2
+    imports = True
+except:
+    imports = False
+
+
+with open(sys.argv[1], 'r') as f:
     data = f.read().split('\n')
 
 def parse_data(dat):
-    points = np.zeros((len(dat), 4), dtype=np.int64)
-    for i in range(len(dat)):
-        pos, vel, _ = dat[i].split('>')
-        x0, y0 = map(int, pos.split('<')[1].split(', '))
-        x1, y1 = map(int, vel.split('<')[1].split(', '))
-        points[i, :] = [x0, y0, x1, y1]
+    # 255 = black, # 180= dark gray, 127 = gray, 60 = light gray, 0 = white(background) etc.
+    decode = {
+        '!': 15,
+        'S': 30,
+        'M': 45,
+        'X': 255,
+        'E': 75,
+        ')': 90,
+        'I': 105,
+        '/': 120,
+        'C': 135,
+        '-': 150,
+        'O': 165,
+        '+': 180,
+        'H': 195,
+        'T': 210,
+        'R': 225,
+        'Y': 240,
+        'A': 250,
+        '(': 60
+    }    
+    points = np.zeros((len(dat), 5), dtype=np.int64)
+    pattern = r'(-?\d+|(?<=symbol=)\S)'
+    if len(re.findall(pattern, dat[0])) == 4:
+        for i in range(len(dat)):
+            x0, y0, x1, y1 = re.findall(pattern, dat[i])
+            val = 255
+            points[i, :] = [x0, y0, x1, y1, val]
+    elif len(re.findall(pattern, dat[0])) == 5:
+        for i in range(len(dat)):
+            x0, y0, x1, y1, val = re.findall(pattern, dat[i])
+            val = decode[val]
+            points[i, :] = [x0, y0, x1, y1, val]
     return points
 
 def get_solution(data):
@@ -25,21 +61,25 @@ def get_solution(data):
         if tmax-tmix < s[1][0]-s[0][0] and tmay-tmiy < s[1][1]-s[0][1]:
             t += 1
             s = [[tmix, tmiy], [tmax, tmay]]
-            data[:, :2] += data[:, 2:]
+            data[:, :2] += data[:, 2:4]
         else:
             t -= 1
-            data[:, :2] -= data[:, 2:]
+            data[:, :2] -= data[:, 2:4]
             break
-    im = np.zeros((s[1][1]-s[0][1]+11, s[1][0]-s[0][0]+11), dtype=np.uint8)
+    t1=time()
+    im = np.ones((s[1][1]-s[0][1]+11, s[1][0]-s[0][0]+11), dtype=np.uint8)*255
     for lp in data:
-        im[lp[1]-s[0][1]+5, lp[0]-s[0][0]+5] = 255
-    im = cv2.resize(im, (int(im.shape[1]*3.5), int(im.shape[0]*3.5)), interpolation=cv2.INTER_NEAREST)
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5,5))
-    im = cv2.dilate(im, kernel, iterations=1)
-    text = pytesseract.image_to_string(im)
-    cv2.imshow('', im)
-    return f"{text} {t} {time()-t0}"
+        im[lp[1]-s[0][1]+5, lp[0]-s[0][0]+5] = 255 - lp[4]
+    plt.plot(im, cmap='gray', interpolation='nearest')
+    if imports:
+        im2 = cv2.resize(np.invert(im), (int(im.shape[1]*3.5), int(im.shape[0]*3.5)), interpolation=cv2.INTER_NEAREST)
+        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5,5))
+        im2 = cv2.dilate(im2, kernel, iterations=1)
+        text = pytesseract.image_to_string(im2)
+        msg = f"Message:          {text}\nTheoretical wait: {t}\nTotal Runtime:    {time()-t0}\nLight movements:  {t1-t0}\nOpenCV + OCR:     {time()-t1}"
+    else: msg = f"Theoretical wait: {t}\nTotal Runtime:    {time()-t0}"
+    return msg
 
 t0=time()
 print(get_solution(data))
-cv2.waitKey()
+plt.show()
